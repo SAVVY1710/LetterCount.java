@@ -14,6 +14,8 @@ public class LetterCount {
 	Scanner input;
 	String fileName;
 	int[]lettercounter;
+	int biggest;
+	char big;
 	
 	// Fields go here, all must be private
 	/* Constructor */							
@@ -22,7 +24,6 @@ public class LetterCount {
 		lettercounter = new int[26];
 		fileName = "";
 		input = null;
-
 	}
 	
 	/* Main routine */
@@ -48,10 +49,46 @@ public class LetterCount {
 			String temp = input.next();
 			for(int i = 0; i < temp.length(); i++)
 			{
-				System.out.println(temp.charAt(i));
+				for(char n = 'a'; n<= 'z'; n++)
+				{
+					if(temp.charAt(i) == n)
+					{
+						int index = (int)(n)-97;
+						lettercounter[index]++;
+					}
+				}
+				for(char n = 'A'; n<= 'Z'; n++)
+				{
+					if(temp.charAt(i) == n)
+					{
+						int index = (int)(n)-65;
+						lettercounter[index]++;
+					}
+				}
 			}
 		}
 		input.close();
+		for(int i = 0; i < 26; i++)
+		{
+			if(lettercounter[i] > biggest)
+			{
+				//big = (char)(i+65);
+				biggest = lettercounter[i];
+			}
+
+		}
+		int rule = biggest/60;
+		System.out.println(rule);
+		for(int i = 0; i < 26; i++)
+		{
+			System.out.print((char)(i+65) + ": ");
+			System.out.printf("%5d", lettercounter[i]);
+			for(int n = 0; n < lettercounter[i]/rule; n++)
+			{
+				System.out.print("+");
+			}
+			System.out.println();
+		}
 	}
 	public void tryCatchIt()
     {
